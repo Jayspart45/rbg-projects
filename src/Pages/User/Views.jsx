@@ -13,6 +13,17 @@ const files = [
   'file3',
   'file1',
   'file2',
+  'file3',
+  'file1',
+  'file2',
+  'file3',
+  'file1',
+  'file2',
+  'file3',
+  'file1',
+  'file2',
+  'file1',
+  'file2',
   'file3'
 ]
 
@@ -45,8 +56,8 @@ const Views = () => {
   //----------------------------------------------
 
     return (
-    <div className="w-full h-screen">
-        <div className="flex items-center justify-end w-full h-1/6">
+    <div className="w-full max-h-screen">
+        <div className="flex items-center justify-end w-full h-fit my-4 z-0">
             <button onClick={setGrid} className=
             {`my-2 mx-1 px-4 py-1 rounded ${theme.grid} `} >
                 Grid
@@ -55,23 +66,23 @@ const Views = () => {
                 List    
             </button>
         </div>
-        <div className="h-5/6">
+        <div className="h-5/6 z-20">
           {
             view==='grid'?
-              <div className="grid grid-cols-3 md:grid-cols-5 p-4 gap-4">
+              <div className="grid grid-cols-3 md:grid-cols-4 h-full overflow-y-auto gap-1">
                 {
                   files.map((file,index)=>(
-                    <div key={index} className="bg-slate-400 bg-opacity-30 m-4 h-24 w-24 rounded-lg">
-                      <p className="text-center">{file}</p>
+                    <div key={index} className="bg-slate-400 flex items-center justify-center bg-opacity-30 m-4 h-44 w-40 rounded-lg">
+                      {file}  
                     </div>
                   ))
                 }
               </div>
-            : <div className="flex items-start flex-col">
+            : <div className="flex items-start h-full flex-col">
                 {
-                  <ul className="w-full">
+                  <ul className="w-full p-4 h-full overflow-y-scroll">
                   {files.map((file,index)=>(
-                    <li key={index}  className="bg-slate-100 bg-opacity-30 my-2 px-4 w-full rounded-lg">
+                    <li key={index}  className="bg-slate-300 bg-opacity-30 h-12 flex items-center my-2 px-4 w-full rounded-lg">
                       {file}
                     </li>
                   ))}
