@@ -40,12 +40,12 @@ const Views = () => {
         <div className="flex items-center justify-between w-full h-1/6 z-0">
           <Dashboard dataArray={dataArray} handleDataFromChild={handleDataFromChild}/>
           <div>
+            <button onClick={setList} className={`my-2 mx-1 px-4 py-1 rounded ${theme.list} `} >
+                List    
+            </button>
             <button onClick={setGrid} className=
             {`my-2 mx-1 px-4 py-1 rounded ${theme.grid} `} >
                 Grid
-            </button>
-            <button onClick={setList} className={`my-2 mx-1 px-4 py-1 rounded ${theme.list} `} >
-                List    
             </button>
           </div>
         </div>
@@ -59,9 +59,9 @@ const Views = () => {
                   ))
                 }
               </div>
-            : <div className="flex items-start h-full flex-col">
+            : <div className="flex items-start max-h-full flex-col">
                 {
-                  <ul className="w-full p-4 h-full overflow-y-scroll">
+                  <ul className="w-full p-4 max-h-full overflow-y-auto">
                   {dataArray.map((file,index)=>(
                     <li key={index}  className="bg-white flex justify-between shadow-sm border border-solid border-Green border-opacity-40 text-xs h-12 items-center my-2 px-4 w-full rounded-lg">
                       <span>
