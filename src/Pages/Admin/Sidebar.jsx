@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 
 function CgProfile(props) {
@@ -7,18 +7,30 @@ function CgProfile(props) {
 
 const Sidebar = ({showMenu,onClick}) => {
     let path = useLocation()
+    const navigate = useNavigate()
     path = path.pathname.split('/')[2]
     let active;
-    if(path === 'dashboard' || path === '' || !path){
+    if(path === undefined){
         active = {
-            dashboard:'bg-slate-100 bg-opacity-30 ',
-            output:''
+            createUser:'',
+            manageUser:''
         }
-    }else{
-        active = {
-            dashboard:'',
-            output:'bg-slate-100 bg-opacity-30 '
+    }
+    else{
+        if(path === 'createuser' || path === ''){
+            active = {
+                createUser:'bg-slate-100 bg-opacity-30 ',
+                manageUser:''
+            }
+        }else{
+            active = {
+                createUser:'',
+                manageUser:'bg-slate-100 bg-opacity-30 '
+            }
         }
+    }
+    const Logout = () =>{
+        navigate('/')
     }
   return (
     <div className={`h-screen w-1/2 z-20 md:left-0 md:w-1/5 lg:1/6 flex max-md:absolute md:flex flex-col justify-between bg-Green text-white transition-all duration-300  ease-in`+(showMenu ? ' left-0' :' -left-full')}>
@@ -27,11 +39,11 @@ const Sidebar = ({showMenu,onClick}) => {
                 Logo
             </div>
             <nav className="w-full border-0 border-t border-white">
-                <NavLink to="/user/dashboard" onClick={onClick} className={`block m-1 active:bg-slate-100 active:bg-opacity-30 rounded text-center px-5 py-3 ${active.dashboard}`}>
-                    Dashboard
+                <NavLink to='/admin/createuser' onClick={onClick} className={`block m-1 active:bg-slate-100 active:bg-opacity-30 rounded text-center px-5 py-3 ${active.createUser}`}>
+                    Create User
                 </NavLink>
-               <NavLink to='/user/output' onClick={onClick} className={`block m-1 active:bg-slate-100 active:bg-opacity-30 rounded text-center px-5 py-3 {active.dashboard}`}>
-                    Output
+               <NavLink to='/admin/manageuser' onClick={onClick} className={`block m-1 active:bg-slate-100 active:bg-opacity-30 rounded text-center px-5 py-3 ${active.manageUser}`}>
+                    Manage Users
                 </NavLink>
              </nav>
         </div>
@@ -42,9 +54,9 @@ const Sidebar = ({showMenu,onClick}) => {
                     Username
                 </span>
             </div>
-            <div className="flex items-center justify-center w-full p-2">
+            <button onClick={Logout} className="flex items-center justify-center w-full p-2">
                 Logout
-            </div>
+            </button>
         </div>
     </div>
   )

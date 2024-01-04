@@ -1,12 +1,17 @@
 import { useState } from "react";
 import LoginImg from "../assets/Images/Secure.gif";
+// import { useImmer } from "use-immer";
 
 const Login = () => {
-  const [admin, setAdmin] = useState(
-    "bg-white text-Green rounded-t-lg rounded-tr-lg"
-  );
+  const [admin, setAdmin] = useState("bg-white text-Green rounded-t-lg rounded-tr-lg");
   const [user, setUser] = useState("bg-Green text-white rounded-bl-lg");
   const [action, setAction] = useState("rounded-tr-lg");
+  // const [adminLogin,setAdminLogin] = useImmer({
+  //   username:'',
+  //   email:'',
+  //   password:''
+  // })
+
   const adminhandleClick = () => {
     setAdmin("bg-white text-Green rounded-t-lg rounded-tr-lg");
     setUser("bg-Green text-white rounded-bl-lg");

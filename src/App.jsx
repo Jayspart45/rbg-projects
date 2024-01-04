@@ -1,9 +1,9 @@
 import ErrorPage from "./Pages/ErrorPage";
 import Login from "./Pages/Login ";
 import { User, Views } from "./Pages/User/User";
-import Admin from "./Pages/Admin/Admin";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Createuser from "./Pages/Admin/Createuser";
+import { Admin } from "./Pages/Admin/Admin";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
@@ -26,16 +26,24 @@ const router = createBrowserRouter([
         element: <Views />,
         errorElement: <ErrorPage />,
       },
-      {
-        path: "/user/dashboard/user",
-        element: <Createuser />,
-      },
     ],
   },
   {
     path: "/admin",
     element: <Admin />,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/admin/createuser",
+        element: <Createuser />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/admin/manageuser",
+        element: <div>manage user</div>,
+        errorElement: <ErrorPage />,
+      },
+    ],
   },
 ]);
 
