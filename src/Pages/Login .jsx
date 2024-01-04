@@ -32,26 +32,18 @@ const Login = () => {
               Login
             </h1>
           </div>
-          <div className="flex  w-full justify-evenly bg-Green">
+          <div className="flex  w-full justify-evenly bg-Green ">
             <div
-              className={`w-1/2 flex py-4 items-center justify-center  ${admin}`}
+              className={`w-1/2 flex py-4 items-center justify-center cursor-pointer  ${admin}`}
+              onClick={adminhandleClick}
             >
-              <button
-                onClick={adminhandleClick}
-                className={`text-xl font-semibold h-full`}
-              >
-                Admin
-              </button>
+              <button className={`text-xl font-semibold h-full`}>Admin</button>
             </div>
             <div
-              className={`w-1/2 flex py-4 items-center justify-center  ${user}`}
+              className={`w-1/2 flex py-4 items-center justify-center cursor-pointer ${user}`}
+              onClick={userhandleClick}
             >
-              <button
-                onClick={userhandleClick}
-                className={`text-xl font-semibold  h-full`}
-              >
-                User
-              </button>
+              <button className={`text-xl font-semibold  h-full`}>User</button>
             </div>
           </div>
           <form className={`${action}`}>

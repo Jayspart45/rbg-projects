@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Sidebar from "./Sidebar"
 import Menu from "./Menu"
+import Views from "./Views"
 import { Outlet } from "react-router-dom"
 const User = () =>{
   const [showMenu,setShowMenu] = useState(false)
@@ -17,4 +18,4 @@ const User = () =>{
   )
 }
 
-export default User
+export {User,Views}

@@ -1,26 +1,48 @@
 import ErrorPage from "./Pages/ErrorPage";
 import Login from "./Pages/Login ";
-import User from "./Pages/User/User";
-import { createBrowserRouter,RouterProvider } from "react-router-dom";
+import { User, Views } from "./Pages/User/User";
+import Admin from "./Pages/Admin/Admin";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Createuser from "./Pages/Admin/Createuser";
 
 const router = createBrowserRouter([
   {
-    path:'/',
-    element:<Login/>,
-    errorElement:<ErrorPage/>
+    path: "/",
+    element: <Login />,
+    errorElement: <ErrorPage />,
   },
   {
-    path:'/user',
-    element:<User/>,
-    errorElement:<ErrorPage/>,
-    
-  }
-])
+    path: "/user",
+    element: <User />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/user/",
+        element: <Views />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/user/dashboard",
+        element: <Views />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/user/dashboard/user",
+        element: <Createuser />,
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <Admin />,
+    errorElement: <ErrorPage />,
+  },
+]);
 
 function App() {
   return (
     <div>
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </div>
   );
 }

@@ -11,12 +11,8 @@ const Dashboard = ({ dataArray, handleDataFromChild }) => {
 
   let state = toggle ? "hidden" : "";
   return (
-    <div
-      className="m-4 h-full p-2 bg-green-50"
-      onClick={handleToogle}
-      onMouseLeave={handleToogle}
-    >
-      <div className="cursor-pointer bg-slate-50 p-4 h-full border-dashed border-slate-900 border-2 border-opacity-40 w-fit">
+    <div className="m-4 h-full p-2 bg-green-50" onClick={handleToogle}>
+      <div className="cursor-pointer flex items-center justify-center bg-slate-50 p-4 h-full border-dashed border-slate-900 border-2 border-opacity-40 w-fit">
         <div className="flex items-center flex-col">
           <TbFileImport size={26} className="text-slate-600" />
           <p className="font-medium text-slate-600">import files</p>
