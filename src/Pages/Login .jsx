@@ -19,7 +19,7 @@ const Login = () => {
   };
   return (
     <div className="min-h-screen flex flex-col justify-center bg-Green ">
-      <div className="text-center bg-Green text-3xl text-white font-semibold">
+      <div className="text-center bg-Green text-3xl text-white font-semibold font-Poppins tracking-widest">
         RBG.AI
       </div>
       <div className="flex flex-col md:flex-row items-center md:justify-evenly md:px-24 m-2 ">
@@ -55,7 +55,7 @@ const Login = () => {
             </div>
           </div>
           <form className={`${action}`}>
-            <div className="p-3">
+            <div className="px-3">
               <label
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-600"
@@ -71,7 +71,7 @@ const Login = () => {
                 required
               />
             </div>
-            <div className="p-3">
+            <div className="px-3 py-2">
               <label
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-600"
@@ -88,7 +88,7 @@ const Login = () => {
               />
             </div>
 
-            <div className="mb-4 p-3">
+            <div className="mb-4 px-3">
               <label
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-600"
