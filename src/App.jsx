@@ -4,10 +4,16 @@ import {User,Views} from "./Pages/User/User";
 import {Admin} from "./Pages/Admin/Admin";
 import { createBrowserRouter,RouterProvider } from "react-router-dom";
 
+const admin = {
+  username:'Admin',
+  email:'admin123@gmail.com',
+  password:'Sp@rk@123'
+}
+
 const router = createBrowserRouter([
   {
     path:'/',
-    element:<Login/>,
+    element:<Login adminData={admin}/>,
     errorElement:<ErrorPage/>
   },
   {
