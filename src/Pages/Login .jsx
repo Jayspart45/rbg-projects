@@ -94,21 +94,18 @@ const Login = ({adminData}) => {
             </h1>
           </div>
           <div className="flex  w-full justify-evenly bg-Green">
-            <div
-              className={`w-1/2 flex py-4 items-center justify-center  ${admin}`}
+            <div onClick={adminhandleClick}
+              className={`w-1/2 flex py-4 cursor-pointer items-center justify-center  ${admin}`}
             >
-              <button
-                onClick={adminhandleClick}
-                className={`text-xl font-semibold h-full`}
-              >
+              <button className={`text-xl font-semibold h-full`}>
                 Admin
               </button>
             </div>
-            <div
-              className={`w-1/2 flex py-4 items-center justify-center  ${user}`}
+            <div onClick={userhandleClick}
+              className={`w-1/2 flex py-4 cursor-pointer items-center justify-center  ${user}`}
             >
               <button
-                onClick={userhandleClick}
+                
                 className={`text-xl font-semibold  h-full`}
               >
                 User

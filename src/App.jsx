@@ -1,7 +1,7 @@
 import ErrorPage from "./Pages/ErrorPage";
 import Login from "./Pages/Login ";
 import {User,Views} from "./Pages/User/User";
-import {Admin} from "./Pages/Admin/Admin";
+import {Admin,ManageUser} from "./Pages/Admin/Admin";
 import { createBrowserRouter,RouterProvider } from "react-router-dom";
 
 const admin = {
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
       },
       {
         path:'/admin/manageuser',
-        element:<div>Manage</div>,
+        element:<ManageUser/>,
         errorElement:<ErrorPage/>
       }
     ]

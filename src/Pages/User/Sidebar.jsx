@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 
 function CgProfile(props) {
@@ -6,6 +6,7 @@ function CgProfile(props) {
 }
 
 const Sidebar = ({showMenu,onClick}) => {
+    const navigate = useNavigate()
     let path = useLocation()
     path = path.pathname.split('/')[2]
     let active;
@@ -42,7 +43,7 @@ const Sidebar = ({showMenu,onClick}) => {
                     Username
                 </span>
             </div>
-            <div className="flex items-center justify-center w-full p-2">
+            <div onClick={()=>navigate('/')} className="flex cursor-pointer items-center justify-center w-full p-2">
                 Logout
             </div>
         </div>
