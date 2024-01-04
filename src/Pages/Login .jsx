@@ -65,7 +65,7 @@ const Login = () => {
         userLogin.username === UserData.username &&
         userLogin.password === UserData.password
       ) {
-        navigate("/admin");
+        navigate("/user");
       } else {
         alert("Invalid Credentials");
         return;
