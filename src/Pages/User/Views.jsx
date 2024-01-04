@@ -9,7 +9,7 @@ const Views = () => {
   const handleDataFromChild = (data) => {
     setDataArray(data);
   };
-  const [view, setView] = useState('grid')
+  const [view, setView] = useState('list')
   const [theme, setTheme] = useState({
     grid: 'bg-slate-100 bg-opacity-30',
     list: ''
@@ -36,7 +36,7 @@ const Views = () => {
   //----------------------------------------------
 
     return (
-    <div className="w-full max-h-screen">
+    <div className="w-full max-h-screen bg-green-50">
         <div className="flex items-center justify-between w-full h-1/6 z-0">
           <Dashboard dataArray={dataArray} handleDataFromChild={handleDataFromChild}/>
           <div>
@@ -52,7 +52,7 @@ const Views = () => {
         <div className="h-5/6 z-20">
           {
             view==='grid'?
-              <div className="grid grid-cols-3 md:grid-cols-4 h-full overflow-y-auto gap-1">
+              <div className="grid grid-cols-3 md:grid-cols-4 max-h-full px-4 overflow-y-auto gap-1">
                 {
                   dataArray.map((file,index)=>(
                     <GridBox key={index} file={file}/>
@@ -63,8 +63,16 @@ const Views = () => {
                 {
                   <ul className="w-full p-4 h-full overflow-y-scroll">
                   {dataArray.map((file,index)=>(
-                    <li key={index}  className="bg-slate-300 bg-opacity-30 h-12 flex items-center my-2 px-4 w-full rounded-lg">
-                      {file.name+" "+ (file.size/1000000<1 ? Math.round(file.size/1000)+"KB":Math.round(file.size/1000000)+"MB")}
+                    <li key={index}  className="bg-white flex justify-between shadow-sm border border-solid border-Green border-opacity-40 text-xs h-12 items-center my-2 px-4 w-full rounded-lg">
+                      <span>
+                        {file.name}
+                        <span className="px-2 font-semibold">
+                        {(file.size/1000000<1 ? Math.round(file.size/1000)+"KB":Math.round(file.size/1000000)+"MB")}
+                        </span>
+                      </span>
+                      <button className="bg-Green p-2 rounded text-white border-black bg-opacity-90">
+                        process
+                      </button>
                     </li>
                   ))}
                   </ul>

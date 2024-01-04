@@ -26,11 +26,11 @@ const Fileupload = ({dataArray,onDataFromChild }) => {
   onDataFromChild(acceptedFiles);
   return (
     <div {...getRootProps()}>
-      <div className="flex w-fit items-center justify-center absolute bg-white m-5 z-10 text">
+      <div className="w-fit absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white m-5 z-10 text">
         <div
           htmlFor="dropzone-file"
           className="flex h-64 p-6
-           w-full cursor-pointer flex-col items-center justify-center rounded-lg border-black border-2 border-dashed"
+           w-full cursor-pointer flex-col items-center justify-center rounded-lg border-slate-800 shadow border border-dashed"
         >
           <div className="flex flex-col items-center justify-center pb-6 pt-5">
             <FaFileZipper size={25} />
@@ -40,11 +40,6 @@ const Fileupload = ({dataArray,onDataFromChild }) => {
             </p>
             <p className="text-xs text-black">only .zip files</p>
             <input id="dropzone-file" {...getInputProps()} className="hidden" />
-            {
-              acceptedFiles.map((file,index)=>{
-                return <p key={index}>{file.name}</p>
-              })
-            }
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Sidebar from "./Sidebar"
-import Views from "./Views"
 import Menu from "./Menu"
+import { Outlet } from "react-router-dom"
 const User = () =>{
   const [showMenu,setShowMenu] = useState(false)
   const onClick = () =>{
@@ -12,7 +12,7 @@ const User = () =>{
     <div className="flex flex-col md:flex-row">
         <Menu onClick={onClick}/>
         <Sidebar showMenu={showMenu} onClick={onClick}/>
-        <Views/>
+        <Outlet/>
     </div>
   )
 }
