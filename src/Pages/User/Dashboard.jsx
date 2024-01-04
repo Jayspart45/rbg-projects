@@ -2,9 +2,9 @@ import { useState } from "react";
 import { TbFileImport } from "react-icons/tb";
 import Fileupload from "./Fileupload";
 import PropTypes from "prop-types";
-const Dashboard = ({dataArray,handleDataFromChild}) => {
+const Dashboard = ({ dataArray, handleDataFromChild }) => {
   const [toggle, setToogle] = useState(true);
-  
+
   const handleToogle = () => {
     setToogle(!toggle);
   };
@@ -19,7 +19,10 @@ const Dashboard = ({dataArray,handleDataFromChild}) => {
         </div>
       </div>
       <div className={`${state} flex justify-center `}>
-        <Fileupload dataArray={dataArray} onDataFromChild={handleDataFromChild} />
+        <Fileupload
+          dataArray={dataArray}
+          onDataFromChild={handleDataFromChild}
+        />
       </div>
       {/* {dataArray.map((dat) => {
         return (
@@ -35,8 +38,8 @@ const Dashboard = ({dataArray,handleDataFromChild}) => {
   );
 };
 Dashboard.propTypes = {
-  dataArray:PropTypes.array,
-  handleDataFromChild:PropTypes.func
-}
+  dataArray: PropTypes.array,
+  handleDataFromChild: PropTypes.func,
+};
 
 export default Dashboard;
