@@ -1,3 +1,4 @@
+import PropTypes from "prop-types"
 const Menu = ({onClick}) => {
   return (
     <div className="w-screen flex z-30 justify-between md:hidden bg-Green text-white">
@@ -8,5 +9,7 @@ const Menu = ({onClick}) => {
     </div>
   )
 }
-
+Menu.propTypes = {
+  onClick:PropTypes.func
+}
 export default Menu
