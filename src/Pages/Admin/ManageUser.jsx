@@ -32,7 +32,7 @@ const ManageUser = () => {
   return (
     <div className="w-full h-screen bg-green-50">
         <div className="h-fit w-full">
-            <div className="flex justify-between items-center px-4 py-2">
+            <div className="flex justify-between max-md:flex-col items-center px-4 py-2">
                 <div className="text-xl font-semibold">
                     Manage User
                 </div>

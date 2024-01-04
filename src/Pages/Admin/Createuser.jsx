@@ -1,8 +1,6 @@
-import React from "react";
-
 const Createuser = () => {
   return (
-    <div className="min-h-screen m-4 w-1/2 space-y-2">
+    <div className="max-h-screen m-4 w-1/2 space-y-2">
       <h1 className="font-Poppins text-2xl text-left ">Create User</h1>
       <form action="">
         <div className="px-3">
