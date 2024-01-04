@@ -1,30 +1,9 @@
 import { useEffect } from "react"
 import { useState } from "react"
+import GridBox from "./GridBox"
 
 const files = [
-  'file1',
-  'file2',
-  'file3',
-  'file1',
-  'file2',
-  'file3',
-  'file1',
-  'file2',
-  'file3',
-  'file1',
-  'file2',
-  'file3',
-  'file1',
-  'file2',
-  'file3',
-  'file1',
-  'file2',
-  'file3',
-  'file1',
-  'file2',
-  'file1',
-  'file2',
-  'file3'
+  'file1uploadedbyuser1andfile2uploaded',
 ]
 
 const Views = () => {
@@ -72,9 +51,8 @@ const Views = () => {
               <div className="grid grid-cols-3 md:grid-cols-4 h-full overflow-y-auto gap-1">
                 {
                   files.map((file,index)=>(
-                    <div key={index} className="bg-slate-400 flex items-center justify-center bg-opacity-30 m-4 h-44 w-40 rounded-lg">
-                      {file}  
-                    </div>
+                    <GridBox key={index} file={file}
+                    />
                   ))
                 }
               </div>
