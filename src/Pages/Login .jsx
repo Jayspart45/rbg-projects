@@ -1,26 +1,85 @@
 import { useState } from "react";
 import LoginImg from "../assets/Images/Secure.gif";
-// import { useImmer } from "use-immer";
+import { useImmer } from "use-immer";
+import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const Login = () => {
-  const [admin, setAdmin] = useState("bg-white text-Green rounded-t-lg rounded-tr-lg");
+const Login = ({ adminData }) => {
+  const navigate = useNavigate();
+  const [admin, setAdmin] = useState(
+    "bg-white text-Green rounded-t-lg rounded-tr-lg"
+  );
   const [user, setUser] = useState("bg-Green text-white rounded-bl-lg");
-  const [action, setAction] = useState("rounded-tr-lg");
-  // const [adminLogin,setAdminLogin] = useImmer({
-  //   username:'',
-  //   email:'',
-  //   password:''
-  // })
+  const [person, setPerson] = useState("admin");
+  const [adminLogin, setAdminLogin] = useImmer({
+    username: "",
+    email: "",
+    password: "",
+  });
+  const [userLogin, setUserLogin] = useImmer({
+    username: "",
+    email: "",
+    password: "",
+  });
+  const handleAdminChange = (e) => {
+    const { name, value } = e.target;
+    setAdminLogin((draft) => {
+      draft[name] = value;
+    });
+  };
+  const handleUserChange = (e) => {
+    const { name, value } = e.target;
+    setUserLogin((draft) => {
+      draft[name] = value;
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (person === "admin") {
+      if (
+        adminLogin.email === adminData.email &&
+        adminLogin.username === adminData.username &&
+        adminLogin.password === adminData.password
+      ) {
+        navigate("/admin");
+      } else {
+        alert("Invalid Credentials");
+        return;
+      }
+    } else {
+      alert(JSON.stringify(userLogin));
+    }
+    setUserLogin((draft) => {
+      draft.username = "";
+      draft.email = "";
+      draft.password = "";
+    });
+    setAdminLogin((draft) => {
+      draft.username = "";
+      draft.email = "";
+      draft.password = "";
+    });
+  };
 
   const adminhandleClick = () => {
     setAdmin("bg-white text-Green rounded-t-lg rounded-tr-lg");
     setUser("bg-Green text-white rounded-bl-lg");
-    setAction("rounded-tr-lg");
+    setPerson("admin");
+    setUserLogin((draft) => {
+      draft.username = "";
+      draft.email = "";
+      draft.password = "";
+    });
   };
   const userhandleClick = () => {
     setAdmin("bg-Green text-white rounded-br-lg");
     setUser("bg-white text-Green rounded-t-lg ");
-    setAction("rounded-tl-lg");
+    setPerson("user");
+    setAdminLogin((draft) => {
+      draft.username = "";
+      draft.email = "";
+      draft.password = "";
+    });
   };
   return (
     <div className="min-h-screen flex flex-col justify-center bg-Green ">
@@ -51,8 +110,8 @@ const Login = () => {
               <button className={`text-xl font-semibold  h-full`}>User</button>
             </div>
           </div>
-          <form className={`${action}`}>
-            <div className="px-3">
+          <form onSubmit={handleSubmit}>
+            <div className="p-3">
               <label
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-600"
@@ -63,6 +122,12 @@ const Login = () => {
                 type="text"
                 id="username"
                 name="username"
+                onChange={
+                  person === "admin" ? handleAdminChange : handleUserChange
+                }
+                value={
+                  person === "admin" ? adminLogin.username : userLogin.username
+                }
                 className="mt-1 p-2 w-full border rounded-md outline-none"
                 placeholder="John"
                 required
@@ -81,6 +146,10 @@ const Login = () => {
                 name="email"
                 className="mt-1 p-2 w-full border rounded-md outline-none"
                 placeholder="sample@example.com"
+                value={person === "admin" ? adminLogin.email : userLogin.email}
+                onChange={
+                  person === "admin" ? handleAdminChange : handleUserChange
+                }
                 required
               />
             </div>
@@ -98,6 +167,12 @@ const Login = () => {
                 name="password"
                 className="mt-1 p-2 w-full border rounded-md outline-none"
                 placeholder="********"
+                value={
+                  person === "admin" ? adminLogin.password : userLogin.password
+                }
+                onChange={
+                  person === "admin" ? handleAdminChange : handleUserChange
+                }
                 required
               />
             </div>
@@ -114,6 +189,10 @@ const Login = () => {
       </div>
     </div>
   );
+};
+
+Login.propTypes = {
+  adminData: PropTypes.object,
 };
 
 export default Login;
