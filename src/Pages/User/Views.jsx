@@ -33,6 +33,26 @@ const Views = () => {
   const setList = () => {
     setView("list");
   };
+
+  const submit = async (file) =>{
+    let formdata = new FormData();
+    formdata.append("file",file)
+    const endpoint = 'http://localhost:8000/api/file/upload'
+    try{
+      const response = await fetch(endpoint,{
+        method:"POST",
+        body:formdata
+      })
+      if(response.ok){
+        console.log("file uploaded")
+      }
+      else{
+        console.log("file not uploaded")
+      }
+    }catch(error){
+      console.log(error)
+    }
+  }
   //----------------------------------------------
 
   return (
@@ -81,7 +101,7 @@ const Views = () => {
                           : Math.round(file.size / 1000000) + "MB"}
                       </span>
                     </span>
-                    <button className="bg-Green p-2 rounded text-white border-black bg-opacity-90">
+                    <button onClick={()=>submit(file)} className="bg-Green p-2 rounded text-white border-black bg-opacity-90">
                       process
                     </button>
                   </li>
