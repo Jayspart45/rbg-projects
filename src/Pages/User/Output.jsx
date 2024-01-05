@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react"
+import { AiOutlineArrowDown } from "react-icons/ai"
+
+
 const Outputs = [
     'Output1',
     'Output2',
@@ -51,7 +54,7 @@ const Output = () => {
                         <span>
                         {output}
                         </span>
-                        <button className="bg-Green bg-opacity-80 text-white px-4 py-1 rounded-lg">Edit</button>
+                        <button className="border-black border border-solid border-opacity-50 bg-opacity-80 flex items-center text-black font-semibold px-4 py-1 rounded-lg">download<AiOutlineArrowDown className="text-base"/></button>
                         </li>
                     })
                 }
