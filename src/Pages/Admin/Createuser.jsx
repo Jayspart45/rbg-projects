@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React from "react";
 import { useState } from "react";
-=======
->>>>>>> ab5656a3717256e983097cbdb556e9f6adfc7d8f
 const Createuser = () => {
   // State to store form data
   const [formData, setFormData] = useState({
