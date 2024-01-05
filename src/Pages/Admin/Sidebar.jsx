@@ -10,25 +10,19 @@ const Sidebar = ({showMenu,onClick}) => {
     const navigate = useNavigate()
     path = path.pathname.split('/')[2]
     let active;
-    if(path === undefined){
+
+    if(path === 'createuser' || path === '' || path === undefined){
         active = {
-            createUser:'',
+            createUser:'bg-slate-100 bg-opacity-30 ',
             manageUser:''
         }
-    }
-    else{
-        if(path === 'createuser' || path === ''){
+    }else{
             active = {
-                createUser:'bg-slate-100 bg-opacity-30 ',
-                manageUser:''
+            createUser:'',
+            manageUser:'bg-slate-100 bg-opacity-30 '
             }
-        }else{
-            active = {
-                createUser:'',
-                manageUser:'bg-slate-100 bg-opacity-30 '
-            }
-        }
     }
+    
     const Logout = () =>{
         navigate('/')
     }

@@ -4,7 +4,20 @@ import { useImmer } from "use-immer";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const Login = ({ adminData }) => {
+const adminData = {
+  username: "Admin",
+  email: "admin123@gmail.com",
+  password: "Sp@rk@123",
+};
+
+const UserData = {
+  username: "user1",
+  email: "user1@gmail.com",
+  password: "rbg@123",
+};
+
+
+const Login = () => {
   const navigate = useNavigate();
   const [admin, setAdmin] = useState(
     "bg-white text-Green rounded-t-lg rounded-tr-lg"
@@ -47,7 +60,16 @@ const Login = ({ adminData }) => {
         return;
       }
     } else {
-      alert(JSON.stringify(userLogin));
+      if (
+        userLogin.email === UserData.email &&
+        userLogin.username === UserData.username &&
+        userLogin.password === UserData.password
+      ) {
+        navigate("/user");
+      } else {
+        alert("Invalid Credentials");
+        return;
+      }
     }
     setUserLogin((draft) => {
       draft.username = "";

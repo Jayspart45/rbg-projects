@@ -73,9 +73,9 @@ const Views = () => {
                     key={index}
                     className="bg-white flex justify-between shadow-sm border border-solid border-Green border-opacity-40 text-xs h-12 items-center my-2 px-4 w-full rounded-lg"
                   >
-                    <span>
+                    <span className="font-semibold">
                       {file.name}
-                      <span className="px-2 font-semibold">
+                      <span className="px-2 font-normal">
                         {file.size / 1000000 < 1
                           ? Math.round(file.size / 1000) + "KB"
                           : Math.round(file.size / 1000000) + "MB"}

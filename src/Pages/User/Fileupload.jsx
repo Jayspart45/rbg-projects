@@ -26,7 +26,7 @@ const Fileupload = ({dataArray,onDataFromChild }) => {
   onDataFromChild(acceptedFiles);
   return (
     <div {...getRootProps()}>
-      <div className="w-fit absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white m-5 z-10 text">
+      <div className="w-fit max-md:w-2/3 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white m-5 z-10 text">
         <div
           htmlFor="dropzone-file"
           className="flex h-64 p-6
@@ -34,7 +34,7 @@ const Fileupload = ({dataArray,onDataFromChild }) => {
         >
           <div className="flex flex-col items-center justify-center pb-6 pt-5">
             <FaFileZipper size={25} />
-            <p className="mb-2 text-sm text-black">
+            <p className="mb-2 text-sm text-center text-black">
               <span className="font-semibold">Click to upload</span> or drag and
               drop
             </p>

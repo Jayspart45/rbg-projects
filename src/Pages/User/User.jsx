@@ -1,5 +1,6 @@
 import { useState } from "react"
 import Sidebar from "./Sidebar"
+import Output from "./Output"
 import Menu from "./Menu"
 import Views from "./Views"
 import { Outlet } from "react-router-dom"
@@ -18,4 +19,4 @@ const User = () =>{
   )
 }
 
-export {User,Views}
+export {User,Views,Output}
