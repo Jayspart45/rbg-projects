@@ -1,19 +1,14 @@
+import axios from "axios";
 import { useState } from "react";
 const Createuser = () => {
   // State to store form data
   const [formData, setFormData] = useState({
-    id: "",
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
 
-  // State to store array of objects
-  const [users, setUsers] = useState([]);
-
-  // State to track password match status
-  const [passwordsMatch, setPasswordsMatch] = useState(true);
 
   // Handle input changes
   const handleChange = (e) => {
@@ -25,33 +20,26 @@ const Createuser = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e)=>{
     e.preventDefault();
-
-    // Check if password and confirm password match
-    if (formData.password === formData.confirmPassword) {
-      // Create a new user object with the form data and a unique id
-      const newUser = { ...formData, id: users.length + 1 };
-
-      // Update the array of users
-      setUsers([...users, newUser]);
-
-      // Clear the form fields
-      setFormData({
-        id: "",
-        username: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
-
-      // Reset password match status
-      setPasswordsMatch(true);
-    } else {
-      // Set password match status to false
-      setPasswordsMatch(false);
+    const endpoint = 'http://localhost:8000/user'
+    try {
+      const response = await axios.post(endpoint,{
+        "name":formData.username,
+        "email":formData.email,
+        "password":formData.password
+      })
+      console.log(response)
+    } catch (error) {
+      console.log(error)
     }
-  };
+    setFormData({
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    })
+  }
 
   return (
     <div className="max-h-screen m-4 w-1/2 space-y-2 bg-green-50">
@@ -119,7 +107,7 @@ const Createuser = () => {
             required
           />
         </div>
-        {!passwordsMatch && <p>Password and Confirm Password do not match.</p>}
+        {/* {!passwordsMatch && <p>Password and Confirm Password do not match.</p>} */}
         <button className=" my-2 mx-4 px-6  py-2 bg-Green active:bg-green-600 text-white rounded-md ">
           Create
         </button>

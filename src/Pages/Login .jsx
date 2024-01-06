@@ -3,19 +3,7 @@ import LoginImg from "../assets/Images/Secure.gif";
 import { useImmer } from "use-immer";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-
-const adminData = {
-  username: "Admin",
-  email: "admin123@gmail.com",
-  password: "Sp@rk@123",
-};
-
-const UserData = {
-  username: "user1",
-  email: "user1@gmail.com",
-  password: "rbg@123",
-};
-
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -46,29 +34,39 @@ const Login = () => {
       draft[name] = value;
     });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (person === "admin") {
-      if (
-        adminLogin.email === adminData.email &&
-        adminLogin.username === adminData.username &&
-        adminLogin.password === adminData.password
-      ) {
-        navigate("/admin");
-      } else {
-        alert("Invalid Credentials");
-        return;
+      try {
+        let endpoint = "http://localhost:8000/signin";
+        let formdata = new FormData();
+        formdata.append("person","admin")
+        formdata.append("email", adminLogin.email);
+        formdata.append("password", adminLogin.password);
+        const response = await axios.post(endpoint, formdata);
+        console.log(response.status);
+        if (response.status == 200) {
+          navigate("/admin");
+        }
+      } catch (error) {
+        alert('invalid credentials')
       }
-    } else {
-      if (
-        userLogin.email === UserData.email &&
-        userLogin.username === UserData.username &&
-        userLogin.password === UserData.password
-      ) {
-        navigate("/user");
-      } else {
-        alert("Invalid Credentials");
-        return;
+    }
+    else {
+      try {
+        let endpoint = "http://localhost:8000/signin";
+        let formdata = new FormData();
+        formdata.append("person","user")
+        formdata.append("email", userLogin.email);
+        formdata.append("password", userLogin.password);
+        const response = await axios.post(endpoint, formdata);
+        console.log(response.status);
+        if (response.status == 200) {
+          navigate("/user");
+        }
+      } catch (error) {
+        alert('invalid credentials')
+        console.log(error);
       }
     }
     setUserLogin((draft) => {
@@ -119,22 +117,17 @@ const Login = () => {
             </h1>
           </div>
           <div className="flex  w-full justify-evenly bg-Green">
-            <div onClick={adminhandleClick}
+            <div
+              onClick={adminhandleClick}
               className={`w-1/2 flex py-4 cursor-pointer items-center justify-center  ${admin}`}
             >
-              <button className={`text-xl font-semibold h-full`}>
-                Admin
-              </button>
+              <button className={`text-xl font-semibold h-full`}>Admin</button>
             </div>
-            <div onClick={userhandleClick}
+            <div
+              onClick={userhandleClick}
               className={`w-1/2 flex py-4 cursor-pointer items-center justify-center  ${user}`}
             >
-              <button
-                
-                className={`text-xl font-semibold  h-full`}
-              >
-                User
-              </button>
+              <button className={`text-xl font-semibold  h-full`}>User</button>
             </div>
           </div>
           <form onSubmit={handleSubmit}>

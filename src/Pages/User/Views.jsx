@@ -14,6 +14,7 @@ const Views = () => {
     grid: "bg-slate-100 bg-opacity-30",
     list: "",
   });
+  const [loading, setLoading] = useState(false);
 
   //changing button background color on click
 
@@ -34,13 +35,9 @@ const Views = () => {
   const setList = () => {
     setView("list");
   };
-
-  const submit = async (file) => {
-    let formdata = new FormData();
-    console.log(file.name);
-    formdata.append("zip_file", file);
-    // formdata.append("file_name", file.name);
-    const endpoint = "http://3.110.154.99:8003/process_images";
+  const send_data = async (formdata) =>{
+    const endpoint = "http://localhost:8000/api/file/upload";
+    // const endpoint = "http://3.110.154.99:8003/process_images";
     try {
       const response = await axios.post(endpoint, formdata, {
         headers: {
@@ -48,13 +45,34 @@ const Views = () => {
         },
       });
       console.log(response);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
+  }
+
+  const submit = async (file) => {
+    setLoading(true);
+    let formdata = new FormData();
+    console.log(file.name);
+    formdata.append("zip_file", file);
+    // formdata.append("file_name", file.name);
+    setTimeout(()=>{
+      send_data(formdata)
+    },[1000])
+    
   };
   //----------------------------------------------
 
-  return (
+  return loading ? (
+    <div className="w-full h-screen flex justify-center items-center">
+      <span className="animate-pulse font-Poppins font-bold text-2xl">Loading</span>
+      <span className="animate-pulse mx-1 text-blue-500 duration-300 text-2xl font-bold">.</span>
+      <span className="animate-pulse mx-1 text-green-500 text-2xl font-bold">.</span>
+      <span className="animate-pulse mx-1 text-red-500 text-2xl font-bold">.</span>
+    </div>
+  ) : (
     <div className="w-full max-h-screen bg-green-50">
       <div className="flex items-center justify-between w-full h-1/6 z-0">
         <Dashboard
