@@ -8,6 +8,7 @@ export default {
     extend: {
       colors:{
         Green:'#76ad5f',
+        // Green:'#2855d1',
       },
       fontFamily:{
         Poppins:"Poppins"

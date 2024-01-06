@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import LoginImg from "../assets/Images/Secure.gif";
 import { useImmer } from "use-immer";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import axios from "axios";
+import { UserContext } from "../Context/Context";
+
 
 const Login = () => {
+  const {setName} =useContext(UserContext)
   const navigate = useNavigate();
   const [admin, setAdmin] = useState(
     "bg-white text-Green rounded-t-lg rounded-tr-lg"
@@ -41,11 +44,13 @@ const Login = () => {
         let endpoint = "http://localhost:8000/signin";
         let formdata = new FormData();
         formdata.append("person","admin")
+        formdata.append("name",adminLogin.name)
         formdata.append("email", adminLogin.email);
         formdata.append("password", adminLogin.password);
         const response = await axios.post(endpoint, formdata);
         console.log(response.status);
         if (response.status == 200) {
+          setName(adminLogin.username)
           navigate("/admin");
         }
       } catch (error) {
@@ -57,11 +62,13 @@ const Login = () => {
         let endpoint = "http://localhost:8000/signin";
         let formdata = new FormData();
         formdata.append("person","user")
+        formdata.append("name",userLogin.name)
         formdata.append("email", userLogin.email);
         formdata.append("password", userLogin.password);
         const response = await axios.post(endpoint, formdata);
         console.log(response.status);
         if (response.status == 200) {
+          setName(userLogin.username)
           navigate("/user");
         }
       } catch (error) {

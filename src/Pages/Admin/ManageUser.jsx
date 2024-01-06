@@ -59,7 +59,7 @@ const ManageUser = () => {
           {
             users && users.length === 0 ? (
             <div className="text-center text-xl font-semibold">
-              No Files Found
+              No Users Found
             </div>
           ) : (
             users &&
