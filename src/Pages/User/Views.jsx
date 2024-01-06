@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import GridBox from "./GridBox";
 import Dashboard from "./Dashboard";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 
 const Views = () => {
@@ -35,33 +37,50 @@ const Views = () => {
   const setList = () => {
     setView("list");
   };
-  const send_data = async (formdata) =>{
-    const endpoint = "http://localhost:8000/api/file/upload";
-    // const endpoint = "http://3.110.154.99:8003/process_images";
-    try {
-      const response = await axios.post(endpoint, formdata, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log(response);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
+  // const send_data = async (formdata) =>{
+  //   const endpoint = "http://localhost:8000/api/file/upload";
+  //   // const endpoint = "http://3.110.154.99:8003/process_images";
+  //   try {
+  //     const response = await axios.post(endpoint, formdata, {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //       },
+  //     });
+  //     console.log(response);
+  //     setLoading(false);
+  //   } catch (error) {
+  //     console.log(error);
+  //     setLoading(false);
+  //   }
+  // }
+
+  const Request = (endpoint,formdata) =>{
+    const request = axios.post(endpoint,formdata,{
+      headers:{
+        "Content-Type":"multipart/form-data"
+      }
+    })
+    request.then(res=>console.log(res)).catch(err=>console.log(err))
+    return request
   }
 
   const submit = async (file) => {
-    setLoading(true);
+    setLoading(false);
     let formdata = new FormData();
     console.log(file.name);
     formdata.append("zip_file", file);
     // formdata.append("file_name", file.name);
-    setTimeout(()=>{
-      send_data(formdata)
-    },[1000])
     
+    const endpoint = "http://localhost:8000/api/file/upload";
+    toast.promise(
+      Request(endpoint,formdata),
+      {
+        pending: 'File Uploading',
+        success: 'File Uploading Successfully',
+        error: 'Failed Uploading File'
+      }
+    )
+    // send_data(formdata)
   };
   //----------------------------------------------
 
@@ -130,6 +149,7 @@ const Views = () => {
             }
           </div>
         )}
+        <ToastContainer/>
       </div>
     </div>
   );
