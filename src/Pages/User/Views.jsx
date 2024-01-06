@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import GridBox from "./GridBox";
 import Dashboard from "./Dashboard";
+import axios from "axios";
 
 const Views = () => {
   const [dataArray, setDataArray] = useState([]);
@@ -34,25 +35,23 @@ const Views = () => {
     setView("list");
   };
 
-  const submit = async (file) =>{
+  const submit = async (file) => {
     let formdata = new FormData();
-    formdata.append("file",file)
-    const endpoint = 'http://localhost:8000/api/file/upload'
-    try{
-      const response = await fetch(endpoint,{
-        method:"POST",
-        body:formdata
-      })
-      if(response.ok){
-        console.log("file uploaded")
-      }
-      else{
-        console.log("file not uploaded")
-      }
-    }catch(error){
-      console.log(error)
+    console.log(file.name);
+    formdata.append("zip_file", file);
+    // formdata.append("file_name", file.name);
+    const endpoint = "http://3.110.154.99:8003/process_images";
+    try {
+      const response = await axios.post(endpoint, formdata, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
   //----------------------------------------------
 
   return (
@@ -81,7 +80,7 @@ const Views = () => {
         {view === "grid" ? (
           <div className="grid grid-cols-3 md:grid-cols-4 max-h-full px-4 overflow-y-auto gap-1">
             {dataArray.map((file, index) => (
-              <GridBox key={index} file={file} />
+              <GridBox key={index} file={file} submit={submit} />
             ))}
           </div>
         ) : (
@@ -101,7 +100,10 @@ const Views = () => {
                           : Math.round(file.size / 1000000) + "MB"}
                       </span>
                     </span>
-                    <button onClick={()=>submit(file)} className="bg-Green p-2 rounded text-white border-black bg-opacity-90">
+                    <button
+                      onClick={() => submit(file)}
+                      className="bg-Green p-2 rounded text-white border-black bg-opacity-90"
+                    >
                       process
                     </button>
                   </li>
