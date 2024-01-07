@@ -5,6 +5,7 @@ import UploadFile from "./UploadFile";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
+import ls from "../Utility";
 
 const Views = () => {
   const [dataArray, setDataArray] = useState([]);
@@ -49,12 +50,13 @@ const Views = () => {
   }
 
   const submit = async (file) => {
+    const id = ls.get('user_id')
     setLoading(false);
     let formdata = new FormData();
     console.log(file.name);
     formdata.append("zip_file", file);
+    formdata.append("id",id)
     const endpoint = "http://3.110.154.99:8004/process_images";
-    // const endpoint = "http://192.168.123.161:80/api/file/upload";
     toast.promise(
       Request(endpoint,formdata),
       {

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import ls from "./Utility";
+import ls from "../Utility";
 
 const ManageUser = () => {
   const [users, setUsers] = useState(ls.get("users") || []);
@@ -8,8 +8,7 @@ const ManageUser = () => {
   useEffect(() => {
     const get_users = async () => {
       try {
-        // const endpoint = "http://localhost:8000/users";
-        let endpoint = "http://192.168.123.161:80/users";
+        let endpoint = "http://3.110.154.99:8004/users";
         const response = await axios.get(endpoint);
         // console.log(response)
         if (response.status == 200) {
@@ -23,18 +22,6 @@ const ManageUser = () => {
     };
     get_users();
   }, []);
-
-//   const find_users = (search) => {
-//     let newUsers
-//         if(search === ''){
-//             newUsers = ls.get('users')
-//         }
-//         else{
-//                 newUsers = users.filter((item) => item.name.includes(search));
-//                 console.log(newUsers);
-//             }
-//     return newUsers
-//   };
 
   return (
     <div className="w-full h-screen bg-green-50">
@@ -72,9 +59,9 @@ const ManageUser = () => {
                   className="bg-white flex justify-between shadow-sm border border-solid border-Green border-opacity-40 text-xs h-12 items-center my-2 px-4 w-full rounded-lg"
                 >
                   <span>{user.name}</span>
-                  <button className="bg-Green bg-opacity-80 text-white px-4 py-1 rounded-lg">
+                  {/* <button className="bg-Green bg-opacity-80 text-white px-4 py-1 rounded-lg">
                     Edit
-                  </button>
+                  </button> */}
                 </li>
               );
                 }

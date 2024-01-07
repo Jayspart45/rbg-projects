@@ -1,27 +1,35 @@
 import { useEffect, useState } from "react";
 import { FaDownload } from "react-icons/fa6";
+import axios from "axios";
+import ls from "../Utility";
 
-const Outputs = [
-  "Output1",
-  "Output2",
-  "Output3",
-  "Output4",
-  "Output5",
-  "Output6",
-  "Output7",
-  "Output8",
-  "Output9",
-  "Output10",
-];
 const Output = () => {
-  const [outputs, setOutputs] = useState(Outputs);
+  const [outputs, setOutputs] = useState(ls.get("outputs") || []);
   const [search, setSearch] = useState("");
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
+  const id = ls.get('user_id')
+  useEffect(() => {
+    const get_outputs = async () => {
+      try {
+        let endpoint = `http://3.110.154.99:8004/outputs/${id}`;
+        const response = await axios.get(endpoint);
+        // console.log(response)
+        if (response.status == 200) {
+          // console.log(response.data)
+          ls.save("outputs", response.data);
+          setOutputs(response.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    get_outputs();
+  }, []);
   useEffect(() => {
     if (search === "") {
-      setOutputs(Outputs);
+      setOutputs(ls.get("outputs") || []);
     } else {
       setOutputs(
         outputs.filter((output) => {
@@ -30,7 +38,7 @@ const Output = () => {
         })
       );
     }
-  }, [search, outputs]);
+  }, [search]);
   return (
     <div className="w-full h-screen bg-green-50">
       <div className="h-fit w-full">
@@ -60,10 +68,10 @@ const Output = () => {
                   key={index}
                   className="bg-white flex justify-between shadow-sm border border-solid border-Green border-opacity-40 text-xs h-12 items-center my-2 px-4 w-full rounded-lg"
                 >
-                  <span>{output}</span>
+                  <span>{output.outputfile.split('/')[1]}</span>
                   <a
                     className="border-Green border border-solid border-opacity-50 bg-opacity-80 cursor-pointer flex items-center font-semibold px-4 py-1 rounded-lg text-Green active:text-white active:bg-Green duration-75"
-                    href=""
+                    href={output.outputfile}
                     download={true}
                   >
                     <FaDownload size={15} />

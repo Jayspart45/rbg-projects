@@ -5,9 +5,11 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { UserContext } from "../Context/Context";
+import lg from './Utility'
 
 
 const Login = () => {
+  lg.clear()
   const {setName} =useContext(UserContext)
   const navigate = useNavigate();
   const [admin, setAdmin] = useState(
@@ -41,8 +43,7 @@ const Login = () => {
     e.preventDefault();
     if (person === "admin") {
       try {
-        // let endpoint = "http://localhost:8000/signin";
-        let endpoint = "http://192.168.123.161:80/signin";
+        let endpoint = "http://3.110.154.99:8004/signin";
         let formdata = new FormData();
         formdata.append("person","admin")
         formdata.append("name",adminLogin.name)
@@ -52,6 +53,7 @@ const Login = () => {
         console.log(response.status);
         if (response.status == 200) {
           setName(adminLogin.username)
+          lg.save('user_name',adminLogin.name)
           navigate("/admin");
         }
       } catch (error) {
@@ -60,16 +62,20 @@ const Login = () => {
     }
     else {
       try {
-        // let endpoint = "http://localhost:8000/signin";
-        let endpoint = "http://192.168.123.161:80/signin";
+        let endpoint = "http://3.110.154.99:8004/signin";
         let formdata = new FormData();
         formdata.append("person","user")
         formdata.append("name",userLogin.name)
         formdata.append("email", userLogin.email);
         formdata.append("password", userLogin.password);
         const response = await axios.post(endpoint, formdata);
+        console.log(response);
         console.log(response.status);
         if (response.status == 200) {
+          const id = response.data.user.id
+          const name = response.data.user.name
+          lg.save('user_id',id)
+          lg.save('user_name',name)
           setName(userLogin.username)
           navigate("/user");
         }

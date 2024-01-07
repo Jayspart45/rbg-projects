@@ -21,7 +21,7 @@ const Createuser = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const endpoint = "http://localhost:8000/user";
+    const endpoint = "http://3.110.154.99:8004/user";
     if (formData.password === formData.confirmPassword) {
       try {
         const response = await axios.post(endpoint, {
