@@ -6,14 +6,14 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import { UserContext } from "../Context/Context";
 
-
 const Login = () => {
-  const {setName} =useContext(UserContext)
+  const { setName } = useContext(UserContext);
   const navigate = useNavigate();
-  const [admin, setAdmin] = useState(
+  const [admin, setAdmin] = useState("bg-Green text-white rounded-bl-lg");
+  // ("bg-Green text-white rounded-bl-lg");
+  const [user, setUser] = useState(
     "bg-white text-Green rounded-t-lg rounded-tr-lg"
   );
-  const [user, setUser] = useState("bg-Green text-white rounded-bl-lg");
   const [person, setPerson] = useState("admin");
   const [adminLogin, setAdminLogin] = useImmer({
     username: "",
@@ -44,37 +44,36 @@ const Login = () => {
         // let endpoint = "http://localhost:8000/signin";
         let endpoint = "http://192.168.123.161:80/signin";
         let formdata = new FormData();
-        formdata.append("person","admin")
-        formdata.append("name",adminLogin.name)
+        formdata.append("person", "admin");
+        formdata.append("name", adminLogin.name);
         formdata.append("email", adminLogin.email);
         formdata.append("password", adminLogin.password);
         const response = await axios.post(endpoint, formdata);
         console.log(response.status);
         if (response.status == 200) {
-          setName(adminLogin.username)
+          setName(adminLogin.username);
           navigate("/admin");
         }
       } catch (error) {
-        alert('invalid credentials')
+        alert("invalid credentials");
       }
-    }
-    else {
+    } else {
       try {
         // let endpoint = "http://localhost:8000/signin";
         let endpoint = "http://192.168.123.161:80/signin";
         let formdata = new FormData();
-        formdata.append("person","user")
-        formdata.append("name",userLogin.name)
+        formdata.append("person", "user");
+        formdata.append("name", userLogin.name);
         formdata.append("email", userLogin.email);
         formdata.append("password", userLogin.password);
         const response = await axios.post(endpoint, formdata);
         console.log(response.status);
         if (response.status == 200) {
-          setName(userLogin.username)
+          setName(userLogin.username);
           navigate("/user");
         }
       } catch (error) {
-        alert('invalid credentials')
+        alert("invalid credentials");
         console.log(error);
       }
     }
