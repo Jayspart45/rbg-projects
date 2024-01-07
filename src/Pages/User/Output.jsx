@@ -44,9 +44,6 @@ const Output = () => {
               onChange={handleChange}
               className="border border-solid border-Green border-opacity-40 rounded-lg px-4 py-1 outline-none"
             />
-            <button className="bg-Green text-white px-4 py-1 rounded-lg">
-              Search
-            </button>
           </div>
         </div>
       </div>

@@ -50,7 +50,7 @@ const Createuser = () => {
 
   return (
     <div className="min-h-screen p-4 flex w-full justify-center items-center bg-green-100">
-      <div className="lg:w-1/3 h-1/2 border bg-Green p-6 rounded-xl">
+      <div className="lg:w-1/3 h-1/2 border bg-Green bg-opacity-85 p-6 rounded-xl">
         <h1 className="font-Poppins text-xl md:text-2xl text-center text-white py-2 tracking-widest">
           Create User
         </h1>
@@ -119,7 +119,7 @@ const Createuser = () => {
           </div>
           <div className="flex justify-center">
             {/* {!passwordsMatch && <p>Password and Confirm Password do not match.</p>} */}
-            <button className=" my-2 mx-4 px-6  py-2 bg-Green border border-white text-white rounded-md ">
+            <button className=" my-2 mx-4 px-6  py-2 bg-Green bg-opacity-80 border border-white text-white rounded-md ">
               Create
             </button>
           </div>

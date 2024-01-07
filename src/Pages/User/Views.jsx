@@ -53,14 +53,14 @@ const Views = () => {
     let formdata = new FormData();
     console.log(file.name);
     formdata.append("zip_file", file);
-    // const endpoint = "http://3.110.154.99:8004/process_images";
-    const endpoint = "http://192.168.123.161:80/api/file/upload";
+    const endpoint = "http://3.110.154.99:8004/process_images";
+    // const endpoint = "http://192.168.123.161:80/api/file/upload";
     toast.promise(
       Request(endpoint,formdata),
       {
-        pending: 'File Uploading',
-        success: 'File Process Started',
-        error: 'Failed Process Initiation'
+        pending: 'File Processing',
+        success: 'File Processed Successfully',
+        error: 'Failed Processing File'
       }
     )
   };
