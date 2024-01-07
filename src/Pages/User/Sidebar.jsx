@@ -15,15 +15,25 @@ const Sidebar = ({showMenu,onClick}) => {
     let path = useLocation()
     path = path.pathname.split('/')[2]
     let active;
-    if(path === 'dashboard' || path === '' || !path){
+    if(path === 'upload' || path === '' || !path){
         active = {
-            dashboard:'bg-slate-100 bg-opacity-30 ',
+            upload:'bg-slate-100 bg-opacity-30 ',
+            dashboard:'',
             output:''
         }
     }else{
+        if(path === 'output')
         active = {
+            upload:'',
             dashboard:'',
             output:'bg-slate-100 bg-opacity-30 '
+        }
+        else{
+            active = {
+                upload:'',
+                dashboard:'bg-slate-100 bg-opacity-30 ',
+                output:''
+            }
         }
     }
     const Logout = () =>{
@@ -37,11 +47,14 @@ const Sidebar = ({showMenu,onClick}) => {
                 Logo
             </div>
             <nav className="w-full border-0 border-t border-white">
-                <NavLink to="/user/dashboard" onClick={onClick} className={`block m-1 active:bg-slate-100 active:bg-opacity-30 rounded text-center px-5 py-3 ${active.dashboard}`}>
-                    Dashboard
+                <NavLink to="/user/upload" onClick={onClick} className={`block m-1 active:bg-slate-100 active:bg-opacity-30 rounded text-center px-5 py-3 ${active.upload}`}>
+                    Upload File
                 </NavLink>
-               <NavLink to='/user/output' onClick={onClick} className={`block m-1 active:bg-slate-100 active:bg-opacity-30 rounded text-center px-5 py-3 {active.dashboard}`}>
+               <NavLink to='/user/output' onClick={onClick} className={`block m-1 active:bg-slate-100 active:bg-opacity-30 rounded text-center px-5 py-3 ${active.output}`}>
                     Output
+                </NavLink>
+                <NavLink to='/user/dashboard' onClick={onClick} className={`block m-1 active:bg-slate-100 active:bg-opacity-30 rounded text-center px-5 py-3 ${active.dashboard}`}>
+                    Dashboard
                 </NavLink>
              </nav>
         </div>

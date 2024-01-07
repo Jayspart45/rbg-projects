@@ -64,9 +64,9 @@ const Output = () => {
                   className="bg-white flex justify-between shadow-sm border border-solid border-Green border-opacity-40 text-xs h-12 items-center my-2 px-4 w-full rounded-lg"
                 >
                   <span>{output}</span>
-                  <button className="border-black border border-solid border-opacity-50 bg-opacity-80 flex items-center text-black font-semibold px-4 py-1 rounded-lg">
+                  <a href="backend\uploads\2101155 -1.zip" download={true} className="border-black border border-solid border-opacity-50 bg-opacity-80 flex items-center text-black font-semibold px-4 py-1 rounded-lg">
                     <FaDownload size={15} />
-                  </button>
+                  </a>
                 </li>
               );
             })

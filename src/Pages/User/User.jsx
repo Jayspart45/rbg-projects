@@ -3,6 +3,7 @@ import Sidebar from "./Sidebar"
 import Output from "./Output"
 import Menu from "./Menu"
 import Views from "./Views"
+import Dashboard from "./Dashboard"
 import { Outlet } from "react-router-dom"
 const User = () =>{
   const [showMenu,setShowMenu] = useState(false)
@@ -19,4 +20,4 @@ const User = () =>{
   )
 }
 
-export {User,Views,Output}
+export {User,Views,Output,Dashboard}

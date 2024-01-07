@@ -1,45 +1,27 @@
-import { useState } from "react";
-import { TbFileImport } from "react-icons/tb";
-import Fileupload from "./Fileupload";
-import PropTypes from "prop-types";
-const Dashboard = ({ dataArray, handleDataFromChild }) => {
-  const [toggle, setToogle] = useState(true);
+// import { Outlet } from "react-router-dom"
 
-  const handleToogle = () => {
-    setToogle(!toggle);
-  };
+let uploaded =5
+let success =3
+let error =2
 
-  let state = toggle ? "hidden" : "";
+const Dashboard = () => {
   return (
-    <div className="m-4 h-full p-2 bg-green-50" onClick={handleToogle}>
-      <div className="cursor-pointer flex items-center justify-center bg-slate-50 p-4 h-full border-dashed border-slate-900 border-2 border-opacity-40 w-fit">
-        <div className="flex items-center flex-col">
-          <TbFileImport size={26} className="text-slate-600" />
-          <p className="font-medium text-slate-600">import files</p>
+    <div className="w-full h-screen bg-green-50 flex items-center justify-center">
+        <div className="w-5/6 h-5/6 bg-white border border-solid border-black border-opacity-20 shadow">
+            <div className="w-full flex items-center justify-around border-0 border-b border-solid border-black">
+                <button className="bg-white py-1 px-2 rounded m-2">Files Uploaded:{uploaded}</button>
+                <button className="bg-white py-1 px-2 rounded m-2">Success Files:{success}</button>
+                <button className="bg-white py-1 px-2 rounded m-2">Error Files:{error}</button>
+            </div>
+            {/* <Outlet/> */}
+            <div className="w-full bg-red-300 ">
+                <span className="w-1/3 h-fit">time</span>
+                <span className="w-1/3 h-fit">time</span>
+                <span className="w-1/3 h-fit">time</span>
+            </div>
         </div>
-      </div>
-      <div className={`${state} flex justify-center `}>
-        <Fileupload
-          dataArray={dataArray}
-          onDataFromChild={handleDataFromChild}
-        />
-      </div>
-      {/* {dataArray.map((dat) => {
-        return (
-          <p key={dat.path}>
-            {dat.name}
-            <span className="px-3"></span>
-            {Math.round(dat.size / 1000000)}
-            MB
-          </p>
-        );
-      })} */}
     </div>
-  );
-};
-Dashboard.propTypes = {
-  dataArray: PropTypes.array,
-  handleDataFromChild: PropTypes.func,
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard
