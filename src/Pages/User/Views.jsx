@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import GridBox from "./GridBox";
-import Dashboard from "./Dashboard";
+import UploadFile from "./UploadFile";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
@@ -37,22 +37,6 @@ const Views = () => {
   const setList = () => {
     setView("list");
   };
-  // const send_data = async (formdata) =>{
-  //   const endpoint = "http://localhost:8000/api/file/upload";
-  //   // const endpoint = "http://3.110.154.99:8003/process_images";
-  //   try {
-  //     const response = await axios.post(endpoint, formdata, {
-  //       headers: {
-  //         "Content-Type": "multipart/form-data",
-  //       },
-  //     });
-  //     console.log(response);
-  //     setLoading(false);
-  //   } catch (error) {
-  //     console.log(error);
-  //     setLoading(false);
-  //   }
-  // }
 
   const Request = (endpoint,formdata) =>{
     const request = axios.post(endpoint,formdata,{
@@ -69,7 +53,6 @@ const Views = () => {
     let formdata = new FormData();
     console.log(file.name);
     formdata.append("zip_file", file);
-    // formdata.append("file_name", file.name);
     // const endpoint = "http://3.110.154.99:8004/process_images";
     const endpoint = "http://192.168.123.161:80/api/file/upload";
     toast.promise(
@@ -80,9 +63,6 @@ const Views = () => {
         error: 'Failed Process Initiation'
       }
     )
-
-    
-    // send_data(formdata)
   };
   //----------------------------------------------
 
@@ -96,7 +76,7 @@ const Views = () => {
   ) : (
     <div className="w-full max-h-screen bg-green-50">
       <div className="flex items-center justify-between w-full h-1/6 z-0">
-        <Dashboard
+        <UploadFile
           dataArray={dataArray}
           handleDataFromChild={handleDataFromChild}
         />
