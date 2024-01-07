@@ -31,7 +31,7 @@ const Sidebar = ({showMenu,onClick}) => {
         navigate('/')
     }
   return (
-    <div className={`h-screen w-1/2 z-20 md:left-0 md:w-1/5 lg:1/6 flex max-md:absolute md:flex flex-col justify-between bg-Green text-white transition-all duration-300  ease-in`+(showMenu ? ' left-0' :' -left-full')}>
+    <div className={`min-h-full w-1/2 z-20 md:left-0 md:w-1/5 lg:1/6 flex max-md:absolute md:flex flex-col justify-between bg-Green text-white transition-all duration-300  ease-in`+(showMenu ? ' left-0' :' -left-full')}>
         <div className="m-0 p-0 w-full">
             <div className="md:text-center px-5 py-4">
                 Logo
