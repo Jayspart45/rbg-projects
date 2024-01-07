@@ -49,16 +49,16 @@ const Createuser = () => {
   };
 
   return (
-    <div className="min-h-screen p-4 flex w-full justify-center items-center bg-green-50">
-      <div className="lg:w-1/3 h-1/2 border border-Green p-6">
-        <h1 className="font-Poppins text-2xl md:text-3xl text-center text-Green py-2">
+    <div className="min-h-screen p-4 flex w-full justify-center items-center bg-green-100">
+      <div className="lg:w-1/3 h-1/2 border bg-Green p-6 rounded-xl">
+        <h1 className="font-Poppins text-xl md:text-2xl text-center text-white py-2 tracking-widest">
           Create User
         </h1>
         <form onSubmit={handleSubmit} className="px-3 space-y-5 md:text-lg">
           <div className="px-3">
             <label
               htmlFor="Username"
-              className="block  font-medium text-gray-600"
+              className="block  text-white font-Poppins"
             >
               Username
             </label>
@@ -67,13 +67,13 @@ const Createuser = () => {
               name="username"
               value={formData.username}
               onChange={handleChange}
-              className="mt-1 p-2 w-full border rounded-md outline-none"
+              className="mt-1 px-2  py-1 w-full border rounded-md  outline-none"
               placeholder="John"
               required
             />
           </div>
           <div className="px-3">
-            <label htmlFor="email" className="block font-medium text-gray-600">
+            <label htmlFor="email" className="block font-Poppins  text-white">
               Email
             </label>
             <input
@@ -81,16 +81,13 @@ const Createuser = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="mt-1 p-2 w-full border rounded-md outline-none"
+              className="mt-1 px-2  py-1 w-full border rounded-md outline-none"
               placeholder="sample@example.com"
               required
             />
           </div>
           <div className="px-3">
-            <label
-              htmlFor="password"
-              className="block  font-medium text-gray-600"
-            >
+            <label htmlFor="password" className="block font-Poppins text-white">
               password
             </label>
             <input
@@ -98,13 +95,16 @@ const Createuser = () => {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className="mt-1 p-2 w-full border rounded-md outline-none"
+              className="mt-1 px-2  py-1 w-full border rounded-md outline-none"
               placeholder="****"
               required
             />
           </div>
           <div className="px-3">
-            <label htmlFor="email" className="block font-medium text-gray-600">
+            <label
+              htmlFor="email"
+              className="block font-Poppins  text-white     "
+            >
               Confirm Password
             </label>
             <input
@@ -112,14 +112,14 @@ const Createuser = () => {
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}
-              className="mt-1 p-2 w-full border rounded-md outline-none"
+              className="mt-1 px-2  py-1 w-full border rounded-md outline-none"
               placeholder="****"
               required
             />
           </div>
           <div className="flex justify-center">
             {/* {!passwordsMatch && <p>Password and Confirm Password do not match.</p>} */}
-            <button className=" my-2 mx-4 px-6  py-2 bg-Green text-center  active:bg-green-600 text-white rounded-md ">
+            <button className=" my-2 mx-4 px-6  py-2 bg-Green border border-white text-white rounded-md ">
               Create
             </button>
           </div>
