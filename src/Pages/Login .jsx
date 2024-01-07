@@ -7,15 +7,15 @@ import axios from "axios";
 import { UserContext } from "../Context/Context";
 import lg from './Utility'
 
-
 const Login = () => {
   lg.clear()
   const {setName} =useContext(UserContext)
   const navigate = useNavigate();
-  const [admin, setAdmin] = useState(
+  const [admin, setAdmin] = useState("bg-Green text-white rounded-bl-lg");
+  // ("bg-Green text-white rounded-bl-lg");
+  const [user, setUser] = useState(
     "bg-white text-Green rounded-t-lg rounded-tr-lg"
   );
-  const [user, setUser] = useState("bg-Green text-white rounded-bl-lg");
   const [person, setPerson] = useState("admin");
   const [adminLogin, setAdminLogin] = useImmer({
     username: "",
@@ -45,8 +45,8 @@ const Login = () => {
       try {
         let endpoint = "http://3.110.154.99:8004/signin";
         let formdata = new FormData();
-        formdata.append("person","admin")
-        formdata.append("name",adminLogin.name)
+        formdata.append("person", "admin");
+        formdata.append("name", adminLogin.name);
         formdata.append("email", adminLogin.email);
         formdata.append("password", adminLogin.password);
         const response = await axios.post(endpoint, formdata);
@@ -57,15 +57,14 @@ const Login = () => {
           navigate("/admin");
         }
       } catch (error) {
-        alert('invalid credentials')
+        alert("invalid credentials");
       }
-    }
-    else {
+    } else {
       try {
         let endpoint = "http://3.110.154.99:8004/signin";
         let formdata = new FormData();
-        formdata.append("person","user")
-        formdata.append("name",userLogin.name)
+        formdata.append("person", "user");
+        formdata.append("name", userLogin.name);
         formdata.append("email", userLogin.email);
         formdata.append("password", userLogin.password);
         const response = await axios.post(endpoint, formdata);
@@ -80,7 +79,7 @@ const Login = () => {
           navigate("/user");
         }
       } catch (error) {
-        alert('invalid credentials')
+        alert("invalid credentials");
         console.log(error);
       }
     }
