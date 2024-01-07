@@ -16,7 +16,7 @@ const Login = () => {
   const [user, setUser] = useState(
     "bg-white text-Green rounded-t-lg rounded-tr-lg"
   );
-  const [person, setPerson] = useState("admin");
+  const [person, setPerson] = useState("user");
   const [adminLogin, setAdminLogin] = useImmer({
     username: "",
     email: "",
@@ -62,6 +62,7 @@ const Login = () => {
     } else {
       try {
         let endpoint = "http://3.110.154.99:8004/signin";
+        console.log("login");
         let formdata = new FormData();
         formdata.append("person", "user");
         formdata.append("name", userLogin.name);
