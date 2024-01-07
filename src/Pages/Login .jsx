@@ -41,7 +41,8 @@ const Login = () => {
     e.preventDefault();
     if (person === "admin") {
       try {
-        let endpoint = "http://localhost:8000/signin";
+        // let endpoint = "http://localhost:8000/signin";
+        let endpoint = "http://192.168.123.161:80/signin";
         let formdata = new FormData();
         formdata.append("person","admin")
         formdata.append("name",adminLogin.name)
@@ -59,7 +60,8 @@ const Login = () => {
     }
     else {
       try {
-        let endpoint = "http://localhost:8000/signin";
+        // let endpoint = "http://localhost:8000/signin";
+        let endpoint = "http://192.168.123.161:80/signin";
         let formdata = new FormData();
         formdata.append("person","user")
         formdata.append("name",userLogin.name)

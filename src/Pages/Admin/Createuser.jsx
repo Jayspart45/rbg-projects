@@ -23,22 +23,32 @@ const Createuser = () => {
   const handleSubmit = async (e)=>{
     e.preventDefault();
     const endpoint = 'http://localhost:8000/user'
-    try {
-      const response = await axios.post(endpoint,{
-        "name":formData.username,
-        "email":formData.email,
-        "password":formData.password
+    if(formData.password===formData.confirmPassword){
+      try {
+        const response = await axios.post(endpoint,{
+          "name":formData.username,
+          "email":formData.email,
+          "password":formData.password
+        })
+        console.log(response)
+      } catch (error) {
+        console.log(error)
+      }
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
       })
-      console.log(response)
-    } catch (error) {
-      console.log(error)
     }
-    setFormData({
-      username: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    })
+    else{
+      setFormData({
+        ...formData,
+        password: "",
+        confirmPassword: "",
+      })
+    }
+    
   }
 
   return (

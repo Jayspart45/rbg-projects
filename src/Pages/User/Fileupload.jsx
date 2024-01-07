@@ -7,9 +7,10 @@ const Fileupload = ({dataArray,onDataFromChild }) => {
   const [acceptedFiles, setAcceptedFiles] = useState(dataArray);
   const onDrop = useCallback(
     (files) => {
+      console.log(files)
       const zipFiles = files.filter(
         (file) =>
-          file.type === "application/zip" &&
+          (file.type === "application/x-zip-compressed" || file.type === 'application/zip' ) &&
           !dataArray.find((existingFile) => existingFile.name === file.name)
       );
       setAcceptedFiles((prevFiles) => [...prevFiles, ...zipFiles]);
@@ -20,7 +21,7 @@ const Fileupload = ({dataArray,onDataFromChild }) => {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: ".jpg",
+    accept: ".zip",
   });
 
   onDataFromChild(acceptedFiles);
