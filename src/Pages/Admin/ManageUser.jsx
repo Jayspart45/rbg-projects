@@ -8,7 +8,7 @@ const ManageUser = () => {
   useEffect(() => {
     const get_users = async () => {
       try {
-        let endpoint = "http://3.110.154.99:8004/users";
+        let endpoint = "http://13.201.163.31:8004/users";
         const response = await axios.get(endpoint);
         // console.log(response)
         if (response.status == 200) {

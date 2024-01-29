@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-// import { FaDownload } from "react-icons/fa6";
+import { FaDownload } from "react-icons/fa6";
 import axios from "axios";
 import ls from "../Utility";
 
 const Output = () => {
   const [outputs, setOutputs] = useState(ls.get("outputs") || []);
   const [search, setSearch] = useState("");
-  // const[url,setUrl] = useState("");
+    // const[url,setUrl] = useState("");
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
@@ -18,7 +18,7 @@ const Output = () => {
         const response = await axios.get(endpoint);
         // console.log(response)
         if (response.status == 200) {
-          console.log(response);
+          console.log(response.data);
           ls.save("outputs", response.data);
           setOutputs(response.data);
         }
@@ -41,71 +41,67 @@ const Output = () => {
     }
   }, [search]);
 
-  // const downloadZipFile = async (filePath) => {
-  //   try {
-  //     const apiUrl = `http://13.201.163.31:8004/download-zip?folder_path=${encodeURIComponent(filePath)}`;
-  //     const response = await axios.get(apiUrl);
+// const downloadZipFile = async (filePath) => {
+//   try {
+//     const apiUrl = `http://13.201.163.31:8004/download-zip?folder_path=${encodeURIComponent(filePath)}`;
+//     const response = await axios.get(apiUrl);
 
-  //     // Log the complete response for debugging
-  //     console.log('Full Response:', response);
+//     // Log the complete response for debugging
+//     console.log('Full Response:', response);
 
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error! Status: ${response.status}`);
-  //     }
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! Status: ${response.status}`);
+//     }
 
-  //     const contentType = response.headers.get('Content-Type');
+//     const contentType = response.headers.get('Content-Type');
 
-  //     if (contentType && contentType.includes('application/zip')) {
-  //       const blob = await response.blob();
+//     if (contentType && contentType.includes('application/zip')) {
+//       const blob = await response.blob();
+      
+//       // Log the blob for debugging
+//       console.log('Blob:', blob);
 
-  //       // Log the blob for debugging
-  //       console.log('Blob:', blob);
+//       downloadFile(blob, 'downloadedFile.zip');
+//     } else {
+//       throw new Error('Invalid or missing Content-Type header for the zip file.');
+//     }
+//   } catch (error) {
+//     console.error('Error downloading the file:', error.message);
+//   }
+// };
 
-  //       downloadFile(blob, 'downloadedFile.zip');
-  //     } else {
-  //       throw new Error('Invalid or missing Content-Type header for the zip file.');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error downloading the file:', error.message);
-  //   }
-  // };
+// const downloadFile = (blob, fileName) => {
+//   const downloadLink = document.createElement('a');
+//   downloadLink.href = window.URL.createObjectURL(blob);
+//   downloadLink.download = fileName;
 
-  // const downloadFile = (blob, fileName) => {
-  //   const downloadLink = document.createElement('a');
-  //   downloadLink.href = window.URL.createObjectURL(blob);
-  //   downloadLink.download = fileName;
-
-  //   document.body.appendChild(downloadLink);
-  //   downloadLink.click();
-  //   document.body.removeChild(downloadLink);
-  // };
+//   document.body.appendChild(downloadLink);
+//   downloadLink.click();
+//   document.body.removeChild(downloadLink);
+// };
 
   const getFile = async (folder_path) => {
-    console.log(
-      `http://13.201.163.31:8004/download-zip?folder_path=${folder_path}`
-    );
-
-    try {
-      const response = await axios.get(
-        `http:127.0.0.1:8004/download-zip?folder_path=${folder_path}`,
-        {
-          responseType: "arraybuffer", // Set responseType to 'arraybuffer' to receive binary data
-        }
-      );
+          console.log(`http://13.201.163.31:8004/download-zip?folder_path=${folder_path}`);
+      
+      try{
+       const response = await axios.get(`http://13.201.163.31:8004/download-zip?folder_path=${folder_path}`, {
+        responseType: 'arraybuffer', // Set responseType to 'arraybuffer' to receive binary data
+      });
 
       // Create a Blob with the binary data
-      const blob = new Blob([response.data], { type: "application/zip" });
+      const blob = new Blob([response.data], { type: 'application/zip' });
 
-      const downloadLink = document.createElement("a");
+    const downloadLink = document.createElement('a');
       downloadLink.href = window.URL.createObjectURL(blob);
       downloadLink.download = `${folder_path.split("/")[1]}`;
 
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink);
-    } catch (error) {
-      console.log(error);
-    }
+      }
+      catch(error){
+      console.log(error)
+      }
   };
   return (
     <div className="w-full h-screen bg-green-50">
@@ -137,7 +133,7 @@ const Output = () => {
                   className="bg-white flex justify-between shadow-sm border border-solid border-Green border-opacity-40 text-xs h-12 items-center my-2 px-4 w-full rounded-lg"
                 >
                   <span>{output.outputfile.split("/")[1]}</span>
-                  {/* {url.length>0?
+                    {/* {url.length>0?
                     <a href={url} download={true}
                       className="border-Green border border-solid border-opacity-50 bg-opacity-80 cursor-pointer flex items-center font-semibold px-4 py-1 rounded-lg text-Green active:text-white active:bg-Green duration-75"
                     >Download
@@ -148,16 +144,17 @@ const Output = () => {
                     
                      */}
                   <button
-                    onClick={() => getFile(output.outputfile)}
+                    onClick={()=>getFile(output.outputfile)}
                     className="border-Green border border-solid border-opacity-50 bg-opacity-80 cursor-pointer flex items-center font-semibold px-4 py-1 rounded-lg text-Green active:text-white active:bg-Green duration-75"
                   >
-                    Get file
+                      Get file
                   </button>
                 </li>
               );
             })
           )}
         </ul>
+          
       </div>
     </div>
   );

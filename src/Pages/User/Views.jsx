@@ -1,14 +1,15 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import GridBox from "./GridBox";
 import UploadFile from "./UploadFile";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import ls from "../Utility";
+import { FileContext } from "../../Context/Context";
 
 const Views = () => {
-  const [dataArray, setDataArray] = useState([]);
+  const { dataArray, setDataArray, setIsLoading } = useContext(FileContext);
   const handleDataFromChild = (data) => {
     setDataArray(data);
   };
@@ -39,49 +40,64 @@ const Views = () => {
     setView("list");
   };
 
-  const Request = (endpoint,formdata) =>{
-    const request = axios.post(endpoint,formdata,{
-      headers:{
-        "Content-Type":"multipart/form-data"
-      }
-    })
-    request.then(res=>console.log(res)).catch(err=>console.log(err))
-    return request
-  }
+  const Request = (endpoint, formdata) => {
+    const request = axios.post(endpoint, formdata, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    request
+      .then((res) => {
+        console.log(res);
+        let prevData = ls.get("outputs") ? ls.get("outputs") : [];
+
+        prevData = [res.data, ...prevData];
+        console.log("prevData", prevData);
+        ls.save("outputs", prevData);
+        if (res) {
+          setIsLoading(false);
+        }
+      })
+      .catch((err) => console.log(err));
+    return request;
+  };
 
   const submit = async (file) => {
-    const id = ls.get('user_id')
+    setIsLoading(true);
+    const id = ls.get("user_id");
     setLoading(false);
     let formdata = new FormData();
-    console.log(file.name);
+    console.log(file, id);
     formdata.append("zip_file", file);
-    formdata.append("id",id)
-    const endpoint = "http://3.110.154.99:8004/process_images";
-    toast.promise(
-      Request(endpoint,formdata),
-      {
-        pending: 'File Processing',
-        success: 'File Processed Successfully',
-        error: 'Failed Processing File'
-      }
-    )
+    formdata.append("id", id);
+    const endpoint = "http://13.201.163.31:8004/process";
+    toast.promise(Request(endpoint, formdata), {
+      pending: "File Processing",
+      success: "File Processed Successfully",
+      error: "Failed Processing File",
+    });
   };
   //----------------------------------------------
 
   return loading ? (
     <div className="w-full h-screen flex justify-center items-center">
-      <span className="animate-pulse font-Poppins font-bold text-2xl">Loading</span>
-      <span className="animate-pulse mx-1 text-blue-500 duration-300 text-2xl font-bold">.</span>
-      <span className="animate-pulse mx-1 text-green-500 text-2xl font-bold">.</span>
-      <span className="animate-pulse mx-1 text-red-500 text-2xl font-bold">.</span>
+      <span className="animate-pulse font-Poppins font-bold text-2xl">
+        Loading
+      </span>
+      <span className="animate-pulse mx-1 text-blue-500 duration-300 text-2xl font-bold">
+        .
+      </span>
+      <span className="animate-pulse mx-1 text-green-500 text-2xl font-bold">
+        .
+      </span>
+      <span className="animate-pulse mx-1 text-red-500 text-2xl font-bold">
+        .
+      </span>
     </div>
   ) : (
     <div className="w-full max-h-screen bg-green-50">
       <div className="flex items-center justify-between w-full h-1/6 z-0">
-        <UploadFile
-          dataArray={dataArray}
-          handleDataFromChild={handleDataFromChild}
-        />
+        <UploadFile handleDataFromChild={handleDataFromChild} />
         <div>
           <button
             onClick={setList}
@@ -111,7 +127,7 @@ const Views = () => {
                 {dataArray.map((file, index) => (
                   <li
                     key={index}
-                    className="bg-white flex justify-between shadow-sm border border-solid border-Green border-opacity-40 text-xs h-12 items-center my-2 px-4 w-full rounded-lg"
+                    className="bg-white flex justify-between shadow-sm border border-solid border-Green border-opacity-40 text-xs h-12 items-center my-2 px-4 w-full rounded"
                   >
                     <span className="font-semibold">
                       {file.name}
@@ -133,7 +149,7 @@ const Views = () => {
             }
           </div>
         )}
-        <ToastContainer/>
+        <ToastContainer />
       </div>
     </div>
   );

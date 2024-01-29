@@ -2,7 +2,7 @@ import { useState } from "react";
 import { TbFileImport } from "react-icons/tb";
 import Fileupload from "./Fileupload";
 import PropTypes from "prop-types";
-const UploadFile = ({ handleDataFromChild }) => {
+const UploadFile = ({ dataArray, handleDataFromChild }) => {
   const [toggle, setToogle] = useState(true);
 
   const handleToogle = () => {
@@ -20,6 +20,7 @@ const UploadFile = ({ handleDataFromChild }) => {
       </div>
       <div className={`${state} flex justify-center `}>
         <Fileupload
+          dataArray={dataArray}
           onDataFromChild={handleDataFromChild}
         />
       </div>

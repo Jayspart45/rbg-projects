@@ -1,8 +1,9 @@
-import { createContext} from "react"
+import { createContext } from "react";
 
-export const UserContext = createContext()
-
+export const UserContext = createContext();
+export const FileContext = createContext();
 const Context = {
-    UserContext,
-}
-export default Context
+  UserContext,
+  FileContext,
+};
+export default Context;

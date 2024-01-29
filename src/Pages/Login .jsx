@@ -43,7 +43,7 @@ const Login = () => {
     e.preventDefault();
     if (person === "admin") {
       try {
-        let endpoint = "http://3.110.154.99:8004/signin";
+        let endpoint = "http://13.201.163.31:8004/signin";
         let formdata = new FormData();
         formdata.append("person", "admin");
         formdata.append("name", adminLogin.name);
@@ -61,8 +61,7 @@ const Login = () => {
       }
     } else {
       try {
-        let endpoint = "http://3.110.154.99:8004/signin";
-        console.log("login");
+        let endpoint = "http://13.201.163.31:8004/signin";
         let formdata = new FormData();
         formdata.append("person", "user");
         formdata.append("name", userLogin.name);

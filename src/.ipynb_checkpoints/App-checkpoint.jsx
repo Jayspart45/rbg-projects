@@ -1,14 +1,15 @@
 import ErrorPage from "./Pages/ErrorPage";
 import Login from "./Pages/Login ";
-import { User, Views, Output, Dashboard } from "./Pages/User/User";
+import {User,Views,Output,Dashboard} from "./Pages/User/User";
 import Createuser from "./Pages/Admin/Createuser";
-import { Admin, ManageUser } from "./Pages/Admin/Admin";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {Admin,ManageUser} from "./Pages/Admin/Admin";
+import { createBrowserRouter,RouterProvider } from "react-router-dom";
+
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Login />,
+    element: <Login/>,
     errorElement: <ErrorPage />,
   },
   {
@@ -54,17 +55,17 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
       },
       {
-        path: "/admin/manageuser",
-        element: <ManageUser />,
-        errorElement: <ErrorPage />,
-      },
-    ],
-  },
-]);
+        path:'/admin/manageuser',
+        element:<ManageUser/>,
+        errorElement:<ErrorPage/>
+      }
+    ]
+  }
+])
 
 function App() {
   return (
-    <div className="font-Poppins">
+    <div>
       <RouterProvider router={router} />
     </div>
   );

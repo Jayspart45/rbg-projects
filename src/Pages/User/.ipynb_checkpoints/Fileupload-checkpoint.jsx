@@ -1,38 +1,33 @@
 import { useDropzone } from "react-dropzone";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { FaFileZipper } from "react-icons/fa6";
 import PropTypes from "prop-types";
-import { FileContext } from "../../Context/Context";
 
-const Fileupload = ({ onDataFromChild }) => {
-  const { dataArray } = useContext(FileContext);
-
+const Fileupload = ({dataArray,onDataFromChild }) => {
   const [acceptedFiles, setAcceptedFiles] = useState(dataArray);
   const onDrop = useCallback(
     (files) => {
+      console.log(files)
       const zipFiles = files.filter(
         (file) =>
-          (file.type === "application/x-zip-compressed" ||
-            file.type === "application/zip") &&
+          (file.type === "application/x-zip-compressed" || file.type === 'application/zip' ) &&
           !dataArray.find((existingFile) => existingFile.name === file.name)
       );
       setAcceptedFiles((prevFiles) => [...prevFiles, ...zipFiles]);
       console.log("Accepted Files:", [...acceptedFiles, ...zipFiles]);
     },
-    [acceptedFiles, dataArray]
+    [acceptedFiles,dataArray]
   );
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: ".zip",
   });
-  useEffect(() => {
-    onDataFromChild(acceptedFiles);
-  }, [acceptedFiles, onDataFromChild]);
 
+  onDataFromChild(acceptedFiles);
   return (
     <div {...getRootProps()}>
-      <div className="w-fit  max-md:w-2/3 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white m-5 z-10 text">
+      <div className="w-fit max-md:w-2/3 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white m-5 z-10 text">
         <div
           htmlFor="dropzone-file"
           className="flex h-64 p-6
@@ -56,5 +51,5 @@ const Fileupload = ({ onDataFromChild }) => {
 Fileupload.propTypes = {
   dataArray: PropTypes.array,
   onDataFromChild: PropTypes.func,
-};
+}
 export default Fileupload;
